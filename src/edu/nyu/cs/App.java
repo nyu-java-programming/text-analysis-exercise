@@ -96,9 +96,7 @@ public class App {
    * @return The full text in the file as a String.
    */
   public static String getContentsOfFile(String filepath) {
-
-    // the code in this function is given to you as a gift... don't change it.
-
+     
     String fullText = "";
     // opening up a file may fail if the file is not there, so use try/catch to protect against such errors
     try {
@@ -139,7 +137,11 @@ public class App {
   }
 
  /**
-   * Counts how many times a given string (the needle) occurs within another string (the haystack), ignoring case.
+   * Counts how many times a given word (the needle) occurs within another text (the haystack).
+   *  - all text matching should be case-insensitive
+   *  - assume that words in the text are separated from one another by any of the following characters: space ( ), line break (\n), tab (\t), period (.), comma (,), question mark (?), or exclamation mark (!)
+   *  - all Strings have a .split() method which can split by any of a collection of characters given as an argument;  This function returns an array of the remaining text that was separated by any of those characters
+   *  - e.g. "foo-bar;baz.bum".split("[-;.]+"") will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
    * @param needle The String to search for.
    * @param haystack The String within which to search.
    * @return THe number of occurrences of the "needle" String within the "haystack" String, ignoring case.
@@ -152,18 +154,11 @@ public class App {
     needle = needle.toLowerCase();
     haystack = haystack.toLowerCase();
 
+    String[] words = haystack.split("[ \n\t.,?!]+");
     int occurrences = 0;
-    int startingPosition = 0;
-    boolean keepGoing = true;
-    // keep looping until we don't find the needle in the haystack anymore
-    while (keepGoing) {
-      int foundAtPosition = haystack.indexOf(needle, startingPosition);
-      if (foundAtPosition == -1) {
-        keepGoing = false;
-      }
-      else {
+    for (String word : words) {
+      if (word.equals(needle)) {
         occurrences++;
-        startingPosition = foundAtPosition + 1;
       }
     }
 
@@ -187,6 +182,7 @@ public class App {
   /**
    * Calculates the "density" of tics in the text.  In other words, the proportion of tic words to the total number of words in a text.
    * Hint:
+   *  - all text matching should be case-insensitive
    *  - assume that words in the text are separated from one another by any of the following characters: space ( ), line break (\n), tab (\t), period (.), comma (,), question mark (?), or exclamation mark (!)
    *  - all Strings have a .split() method which can split by any of a collection of characters given as an argument;  This function returns an array of the remaining text that was separated by any of those characters
    *  - e.g. "foo-bar;baz.bum".split("[-;.]+"") will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
