@@ -31,10 +31,15 @@ public class AppTest {
         String[] expecteds = {"test/data/test1.txt", "test/data/trump_speech_010621.txt", "foo/bar/baz"};
         for (String expected : expecteds) {
             systemInMock.provideLines(expected);
-            String actual = App.getFilepathFromUser().trim();
-            // System.out.println(actual);
-            if (!actual.equals(expected)) {
-                assertEquals("Expected the getFilePathFromUser() function to return the file path we entered", "Returned " + actual + " instead.");
+            try {
+                String actual = App.getFilepathFromUser().trim();
+                // System.out.println(actual);
+                if (!actual.equals(expected)) {
+                    assertEquals("Expected the getFilePathFromUser() function to return the file path we entered", "Returned " + actual + " instead.");
+                }
+            }
+            catch (Exception e) {
+                    assertEquals("Expected the getFilePathFromUser() not to crash when called", "The function threw an Exception when called.");
             }
         }
     }
@@ -55,16 +60,21 @@ public class AppTest {
             String mockInput = mockInputs[i];
             String[] expected = expecteds[i];
             systemInMock.provideLines(mockInput);
-            String[] actual = App.getTicsFromUser();
-            if (!(expected.length == actual.length)) {
-                assertEquals("Expected the getTicsFromUser() function to return an array of " + expected.length + " tics, given the input: " + mockInput, "Returned an array of " + actual.length + " instead");
-                return;
-            }
-            for (i=0; i<expected.length; i++) {
-                if (!(expected[i].equals(actual[i]))) {
-                    assertEquals("Expected the getTicsFromUser() function to return an array including the string " + expected[i] + " at position " + i + ", given the input: " + mockInput, "Returned an array with the string " + actual[i] + " at position " + i + " instead.");
+            try {
+                String[] actual = App.getTicsFromUser();
+                if (!(expected.length == actual.length)) {
+                    assertEquals("Expected the getTicsFromUser() function to return an array of " + expected.length + " tics, given the input: " + mockInput, "Returned an array of " + actual.length + " instead");
                     return;
                 }
+                for (i=0; i<expected.length; i++) {
+                    if (!(expected[i].equals(actual[i]))) {
+                        assertEquals("Expected the getTicsFromUser() function to return an array including the string " + expected[i] + " at position " + i + ", given the input: " + mockInput, "Returned an array with the string " + actual[i] + " at position " + i + " instead.");
+                        return;
+                    }
+                }
+            }
+            catch (Exception e) {
+                assertEquals("Expected the getTicsFromUser() function not to crash when called", "The function crashed when given the input: " + mockInput);
             }
         }
     }
@@ -91,9 +101,14 @@ public class AppTest {
             String needle = needles[i];
             String haystack = haystacks[i];
             int expected = expecteds[i];
-            int actual = App.countOccurrences(needle, haystack);
-            if (actual != expected) {
-                assertEquals("Expected the countOccurrences() function to return " + expected + " when counting the occurrences of '" + needle + "' in the text '" + haystack + "'", "Returned " + actual + " instead.");
+            try {
+                int actual = App.countOccurrences(needle, haystack);
+                if (actual != expected) {
+                    assertEquals("Expected the countOccurrences() function to return " + expected + " when counting the occurrences of '" + needle + "' in the text '" + haystack + "'", "Returned " + actual + " instead.");
+                }
+            }
+            catch (Exception e) {
+                    assertEquals("Expected the countOccurrences() function not to crash.",  "The function crashed when passed the arguments '" + needle + "' and '" + haystack + "'.");
             }
         }
     }
@@ -115,9 +130,14 @@ public class AppTest {
         for (int i=0; i<mockInputs.length; i++) {
             int[] mockInput = mockInputs[i];
             int expected = expecteds[i];
-            int actual = App.calculatePercentage(mockInput[0], mockInput[1]);
-            if (expected != actual) {
-                assertEquals("Expected the calculatePercentage() function to return " + expected + ", given the arguments " + mockInput[0] + " and " + mockInput[1], "Instead it returned " + actual);
+            try {
+                int actual = App.calculatePercentage(mockInput[0], mockInput[1]);
+                if (expected != actual) {
+                    assertEquals("Expected the calculatePercentage() function to return " + expected + ", given the arguments " + mockInput[0] + " and " + mockInput[1], "Instead it returned " + actual);
+                }
+            }
+            catch (Exception e) {
+                    assertEquals("Expected the calculatePercentage() function not to crash when called.", "The function threw an Exception when given the arguments " + mockInput[0] + " and " + mockInput[1]);
             }
         }
     }
@@ -144,16 +164,26 @@ public class AppTest {
             String[] mockTic = mockTics[i];
             String mockText = mockTexts[i];
             double expected = expecteds[i];
-            double actual = App.calculateTicDensity(mockTic, mockText);
-            if (expected != actual) {
-                assertEquals("Expected the calculateTicDensity() function to return " + expected + ", given the arguments " + Arrays.toString(mockTic) + " and " + mockText, "Instead it returned " + actual);
+            try {
+                double actual = App.calculateTicDensity(mockTic, mockText);
+                if (expected != actual) {
+                    assertEquals("Expected the calculateTicDensity() function to return " + expected + ", given the arguments " + Arrays.toString(mockTic) + " and " + mockText, "Instead it returned " + actual);
+                }
+            }
+            catch (Exception e) {
+                    assertEquals("Expected the calculateTicDensity() function not to crash.", "It crashed when given the arguments " + Arrays.toString(mockTic) + " and " + mockText);
             }
         }
     }
     
     @Test
     public void testMain() {
-        assertEquals("Expecting your main method to be automatically tested and judged for correctness?", "We will evaluate the correctness of your main method and grade it manually once you submit the assignment!  In the meantime, make sure you have followed the instructions.");
+        try {
+            assertEquals("Expecting your main method to be automatically tested and judged for correctness?", "We will evaluate the correctness of your main method and grade it manually once you submit the assignment!  In the meantime, make sure you have followed the instructions.  Ignore this failing test.");
+        }
+        catch (Exception e) {
+            assertEquals("Expected your main() function not to crash when run.", "It crashed. Try it yourself!");
+        }
     }
 
 }
