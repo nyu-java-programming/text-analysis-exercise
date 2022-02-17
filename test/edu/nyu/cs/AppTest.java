@@ -153,7 +153,7 @@ public class AppTest {
     
     @Test
     public void testMain() {
-        assertEquals("Expecting your main method to be automatically tested and judged for correctness!", "We will evaluate the correctness of your main method manually once you submit the assignment!  In the meantime, make sure you have followed the instructions.");
+        assertEquals("Expecting your main method to be automatically tested and judged for correctness?", "We will evaluate the correctness of your main method and grade it manually once you submit the assignment!  In the meantime, make sure you have followed the instructions.");
     }
 
 }
