@@ -189,7 +189,7 @@ public class App {
    * Hint:
    *  - assume that words in the text are separated from one another by any of the following characters: space ( ), line break (\n), tab (\t), period (.), comma (,), question mark (?), or exclamation mark (!)
    *  - all Strings have a .split() method which can split by any of a collection of characters given as an argument;  This function returns an array of the remaining text that was separated by any of those characters
-   *  - e.g. "foo-bar;baz.bum".split([-;.]) will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
+   *  - e.g. "foo-bar;baz.bum".split("[-;.]+"") will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
    * @param tics An array of tic words to analyze.
    * @param fullText The full text.
    * @return The proportion of the number of tic words present in the text to the total number of words in the text, as a double.
@@ -205,7 +205,7 @@ public class App {
     }
 
     // get the total number of words in the text
-    String[] words = fullText.split("[ \n\t.,?!]");
+    String[] words = fullText.split("[ \n\t.,?!]+");
     int totalWordsInText = words.length;
 
     // calculate "density" - the proportion of tics to words
