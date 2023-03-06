@@ -10,7 +10,7 @@ The institute has hired a [Hyderabad, India](https://en.wikipedia.org/wiki/Hyder
 
 ## The program
 
-The program must be able to open any text file specified by the user, and analyze the frequency of verbal tics in the text. Since there are many different kinds of verbal tics (such as "`like`", "`uh`", "`um`", etc) the program must ask the user what tics to look for. A user can enter multiple tics, separated by commas - any spaces entered by the user before or after each tic must be ignored. You can assume all tics are single words.
+The program must be able to open any text file specified by the user, and analyze the frequency of verbal tics in the text. Since there are many different kinds of verbal tics (such as "`like`", "`uh`", "`um`", etc) the program must ask the user what tics to look for. A user can enter multiple tics, separated by commas - any spaces entered by the user before or after each tic must be ignored. Note that some verbal tics are single-word, while others are multi-word.
 
 The program should output:
 
