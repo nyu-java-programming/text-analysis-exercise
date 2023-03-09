@@ -36,7 +36,7 @@ public class AppTest {
                 String actual = App.getFilepathFromUser().trim();
                 // System.out.println(actual);
                 if (!actual.equals(expected)) {
-                    assertEquals("Expected the getFilePathFromUser() function to return the file path we entered", "Returned " + actual + " instead.");
+                    assertEquals("Expected the getFilePathFromUser() function to return the file path we entered", "Returned '" + actual + "' instead.");
                 }
             }
             catch (Exception e) {
@@ -64,12 +64,12 @@ public class AppTest {
             try {
                 String[] actual = App.getTicsFromUser();
                 if (!(expected.length == actual.length)) {
-                    assertEquals("Expected the getTicsFromUser() function to return an array of " + expected.length + " tics, given the input: " + mockInput, "Returned an array of " + actual.length + " instead");
+                    assertEquals("Expected the getTicsFromUser() function to return an array of " + expected.length + " tics, given the input: '" + mockInput + "'.", "Returned an array of " + actual.length + " instead");
                     return;
                 }
                 for (int j=0; j<expected.length; j++) {
                     if (!(expected[j].equals(actual[j]))) {
-                        assertEquals("Expected the getTicsFromUser() function to return an array including the string " + expected[j] + " at position " + j + ", given the input: " + mockInput, "Returned an array with the string " + actual[j] + " at position " + j + " instead.");
+                        assertEquals("Expected the getTicsFromUser() function to return an array including the string '" + expected[j] + "' at position " + j + ", given the input: '" + mockInput + "'.", "Returned an array with the string '" + actual[j] + "' at position " + j + " instead.");
                         return;
                     }
                 }
@@ -134,7 +134,7 @@ public class AppTest {
             try {
                 int actual = App.calculatePercentage(mockInput[0], mockInput[1]);
                 if (expected != actual) {
-                    assertEquals("Expected the calculatePercentage() function to return " + expected + ", given the arguments " + mockInput[0] + " and " + mockInput[1], "Instead it returned " + actual);
+                    assertEquals("Expected the calculatePercentage() function to return " + expected + ", given the arguments '" + mockInput[0] + "' and '" + mockInput[1] + "'", "Instead it returned " + actual);
                 }
             }
             catch (Exception e) {

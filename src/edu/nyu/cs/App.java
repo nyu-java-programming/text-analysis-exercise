@@ -30,48 +30,10 @@ public class App {
 
     // complete this function according to the instructions
 
-    // open the file the user indicates
-    String filepath = getFilepathFromUser();
-    String fullText = getContentsOfFile(filepath);
-
-    // get the tics and analyze them
-    String[] tics = getTicsFromUser();
-
-    int[] occurrences = new int[tics.length];
-    int[] percentages = new int[tics.length];
-    int totalTicOccurrences = 0;
-
-    // count occurrences for each tic
-    for (int i=0; i<tics.length; i++) {
-      String tic = tics[i];
-      occurrences[i] = countOccurrences(tic, fullText); // case insensitive count
-      totalTicOccurrences += occurrences[i];
-    }
-
-    // calculate percentage of all tics that each tic represents
-    for (int i=0; i<tics.length; i++) {
-      percentages[i] = calculatePercentage(occurrences[i], totalTicOccurrences); // case insensitive count
-    }
-
-    // calculate tic density - the proportion of all words in the text that are tics
-    double density = calculateTicDensity(tics, fullText);
-    String strDensity = String.format("%.2f", density); // limit to two decimal places
-
-    // output results
-    System.out.println("\n...............................Analyzing text.................................\n");
-    System.out.println("Total number of tics: " + totalTicOccurrences);
-    System.out.println("Density of tics: " + strDensity);
-    System.out.println("\n...............................Tic breakdown..................................\n");
-    for (int i=0; i<tics.length; i++) {
-      String tic = String.format("%-9s", tics[i]);
-      String occurrence = String.format("%-18s", occurrences[i] + " occurrences");
-      String percentage = percentages[i] + "% of all tics";
-      System.out.println(tic + " / " + occurrence + " / " + percentage );
-    }
-
   }
 
   /**
+   * getFilepathFromUser method
    * Asks the user to enter the path to the text file they want to analyze.
    * Hint:
    *  - use the "global"-ish Scanner variable scn to get the response from the user, rather than creating a new Scanner variable ithin this function.
@@ -79,17 +41,15 @@ public class App {
    * @return The file path that the user enters, e.g. "data/trump_speech_010621.txt"
    */
   public static String getFilepathFromUser() {
-
-    // complete this function according to the instructions
-
-    System.out.println("What file would you like to open?"); 
-    String filepath = scn.nextLine(); 
+    // complete the getFilepathFromUser function according to the instructions above
+    System.out.println("What file would you like to analyze?");
+    String filepath = scn.nextLine();
     return filepath;
   }
 
 
   /**
-   * 
+   * getContentsOfFile method
    * Opens the specified file and returns the text therein.
    * If the file can't be opened, print out the message, "Oh no... can't find the file!"
    * @param filename The path to a text file containing a speech transcript with verbal tics in it.
@@ -116,6 +76,7 @@ public class App {
   }
   
  /**
+   * getTicsFromUser method
    * Asks the user to enter a comma-separated list of tics, e.g. "uh,like, um, you know,so", and returns an array containing those tics, e.g. { "uh", "like", "um", "you know", "so" }.
    * Hint:
    *  - use the "global"-ish Scanner variable scn to get the response from the user, rather than creating a new Scanner variable ithin this function.
@@ -123,20 +84,19 @@ public class App {
    * @return A String array containing each of the tics to analyze, with any leading or trailing whitespace removed from each tic.
    */
   public static String[] getTicsFromUser() {
-
-    // complete this function according to the instructions
-
-    String[] tics;
-    System.out.println("Please enter a comma-separated list of tics to analyze:");
-    String response = scn.nextLine();
-    tics = response.split(","); // split comma-separated string into an array
-    for (int i=0; i<tics.length; i++) {
-      tics[i] = tics[i].trim(); // remove leading/trailing whitespace
+    // complete the getTicsFromUser function according to the instructions above
+    System.out.println("What tics would you like to analyze?");
+    String tics = scn.nextLine();
+    String[] ticArray = tics.split(",");
+    // remove whitespace
+    for (int i = 0; i < ticArray.length; i++) {
+      ticArray[i] = ticArray[i].trim();
     }
-    return tics; // return the array of tics
+    return ticArray;
   }
 
  /**
+   * countOccurrences method
    * Counts how many times a given word (the needle) occurs within another text (the haystack).
    *  - all text matching should be case-insensitive
    *  - assume that words in the text are separated from one another by any of the following characters: space ( ), line break (\n), tab (\t), period (.), comma (,), question mark (?), or exclamation mark (!)
@@ -147,8 +107,6 @@ public class App {
    * @return THe number of occurrences of the "needle" String within the "haystack" String, ignoring case.
    */
   public static int countOccurrences(String needle, String haystack) {
-
-    // complete this function according to the instructions
 
     // convet to lowercase
     needle = needle.toLowerCase();
@@ -166,34 +124,32 @@ public class App {
   }
 
   /**
+   * calculatePercentage method
    * Calculates the equivalent percentage from the proportion of one number to another number.
    * @param num1 The number to be converted to a percentage.  i.e. the numerator in the ratio of num1 to num2.
    * @param num2 The overall number out of which the num1 number is taken.  i.e. the denominator in the ratio of num1 to num2.
    * @return The percentage that rum1 represents out of the total of num2, rounded to the nearest integer.
    */
   public static int calculatePercentage(int num1, int num2) {
-
-    // complete this function according to the instructions
-
-    int percentage = (int) Math.round(100.0 * num1 / num2);
-    return percentage;
+    // write the calculatePercentage function according to the instructions above
+    double percentage = (double) num1 / num2 * 100;
+    return (int) Math.round(percentage);
   }
 
   /**
+   * calculateTicDensity method
    * Calculates the "density" of tics in the text.  In other words, the proportion of tic words to the total number of words in a text.
    * Hint:
    *  - all text matching should be case-insensitive
    *  - assume that words in the text are separated from one another by any of the following characters: space ( ), line break (\n), tab (\t), period (.), comma (,), question mark (?), or exclamation mark (!)
    *  - all Strings have a .split() method which can split by any of a collection of characters given as an argument;  This function returns an array of the remaining text that was separated by any of those characters
-   *  - e.g. "foo-bar;baz.bum".split("[-;.]+"") will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
+   *  - e.g. "foo-bar;baz.bum".split("[-;.]+") will result in an array with { "foo", "bar", "baz", and "bum" } as the values.
    * @param tics An array of tic words to analyze.
    * @param fullText The full text.
    * @return The proportion of the number of tic words present in the text to the total number of words in the text, as a double.
    */
   public static double calculateTicDensity(String[] tics, String fullText) {
-
-    // complete this function according to the instructions
-
+    
     // get the total number of occurrences of all tics
     int totalTicOccurrences = 0;
     for (String tic : tics) {
