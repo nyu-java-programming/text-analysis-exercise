@@ -89,9 +89,9 @@ public class App {
     String tics = scn.nextLine();
     String[] ticArray = tics.split(",");
     // remove whitespace
-    for (int i = 0; i < ticArray.length; i++) {
-      ticArray[i] = ticArray[i].trim();
-    }
+    // for (int i = 0; i < ticArray.length; i++) {
+    //   ticArray[i] = ticArray[i].trim();
+    // }
     return ticArray;
   }
 
